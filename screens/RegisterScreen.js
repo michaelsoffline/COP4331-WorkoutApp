@@ -5,33 +5,54 @@ import { StyleSheet, Text, View, Image, ImageBackground, Button, TextInput} from
 
 import { Alert, SafeAreaView, TouchableWithoutFeedback } from 'react-native-web';
 
-function LoginScreen(props) {
+function RegisterScreen(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirst] = useState('');
+    const [lastName, setLast] = useState('');
+    const [email, setEmail] = useState('');
     return(
         // Main View
         <View style = {styles.background}>
 
             <View style = {styles.colorTop}>
                 <View style={styles.smallPadding}></View>
-                <Text style={styles.titleText}>Login</Text>
+                <Text style={styles.titleText}>Register</Text>
             </View>
-
             <View style = {styles.smallPadding}></View>
-
             <Image 
                 style= {{height: 200, width: 200}}
                 source={require('../assets/logo.png')}/>
 
-            <View style={styles.smallPadding}></View>
 
             <TextInput
                 style={styles.input}
-                placeholder='Username'
+                placeholder='First Name'
                 secureTextEntry={false}  
+                onChangeText={newFirst => setFirst(newFirst)}
+                defaultValue={firstName} 
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Last Name'
+                secureTextEntry={false}
+                onChangeText={newLast => setLast(newLast)}
+                defaultValue={lastName}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Username'
+                secureTextEntry={false}
                 onChangeText={newUsername => setUsername(newUsername)}
-                defaultValue={username} 
+                defaultValue={username}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Email'
+                secureTextEntry={false}
+                onChangeText={newEmail => setEmail(newEmail)}
+                defaultValue={email}
             />
             <TextInput
                 style={styles.input}
@@ -40,14 +61,15 @@ function LoginScreen(props) {
                 onChangeText={newPassword => setPassword(newPassword)}
                 defaultValue={password}
             />
-
-            <View style={styles.loginSquare}> 
+            
+            <View style={styles.registerSquare}> 
                 <Button  
-                title='Login'
+                title='Register Now'
                 color='#fff'
-                onPress={() => [console.log(username), console.log(password)]}
+                onPress={() => [console.log(firstName), console.log(lastName),console.log(username),console.log(email),console.log(password)]}
                 />
             </View>
+
             <View style={styles.backSquare}> 
                 <Button  
                 title='Back'
@@ -55,9 +77,8 @@ function LoginScreen(props) {
                 onPress={() => console.log("Back")}
                 />
             </View>
-            
-        </View>
 
+        </View>
     );
 }
 
@@ -77,10 +98,9 @@ const styles = StyleSheet.create({
         height: "7%",
         backgroundColor: 'red',
         justifyContent: 'center',
-
     },
     colorTop: {
-        backgroundColor: "#ACD1AF",
+        backgroundColor: "#4FB5D3",
         width: "100%",
         height: "15%",
         borderRadius: 20,
@@ -103,14 +123,15 @@ const styles = StyleSheet.create({
     smallPadding: {
         padding: "2%"
     },
-    loginSquare: {
+    registerSquare: {
         position: "absolute",
         bottom: "15%",
         width: "80%",
         height: "7%",
-        backgroundColor: '#ACD1AF',
+        backgroundColor: '#4FB5D3',
         justifyContent: 'center',
 
         },
 });
-export default LoginScreen;
+
+export default RegisterScreen;
