@@ -13,8 +13,14 @@ const RootStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Register">
-        <RootStack.Screen name="Welcome" component={WelcomeScreen} />
+      <RootStack.Navigator initialRouteName="Welcome">
+        <RootStack.Screen
+          name="Welcome"
+          component={WelcomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <RootStack.Screen
           name="Register"
           component={RegisterScreen}
@@ -41,7 +47,19 @@ export default function App() {
             },
           }}
         />
-        <RootStack.Screen name="Profile" component={ProfileScreen} />
+        <RootStack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            title: "Profile",
+            headerStyle: { backgroundColor: "#4FB5D3" },
+            headerTitleStyle: {
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: 30,
+            },
+          }}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
