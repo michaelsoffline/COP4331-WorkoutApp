@@ -6,6 +6,7 @@ import WelcomeScreen from "./screens/WelcomeScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
 import RegisterScreen from "./screens/RegisterScreen.js";
 import ProfileScreen from "./screens/ProfileScreen.js";
+import HomeScreen from "./screens/HomeScreen.js";
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const RootStack = createNativeStackNavigator();
@@ -13,7 +14,7 @@ const RootStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Welcome">
+      <RootStack.Navigator initialRouteName="Register">
         <RootStack.Screen
           name="Welcome"
           component={WelcomeScreen}
@@ -47,6 +48,7 @@ export default function App() {
             },
           }}
         />
+        <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen
           name="Profile"
           component={ProfileScreen}

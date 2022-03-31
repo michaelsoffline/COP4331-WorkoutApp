@@ -17,7 +17,76 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-web";
 
-function RegisterScreen(props) {
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import axios from "axios";
+
+function RegisterScreen({ navigation }) {
+  var bp = require("../components/Path");
+  // var storage = require("../tokenStorage.js");
+
+  var newFirstName, newLastName, newEmail, newPassword;
+
+  const [message, setMessage] = useState("");
+
+  const attemptRegistration = async (event) => {
+    event.preventDefault();
+
+    var obj = {
+      firstName: newFirstName.value,
+      lastName: newLastName.value,
+      email: newEmail.value,
+      password: newPassword.value,
+    };
+
+    var js = JSON.stringify(obj);
+
+    var config = {
+      method: "POST",
+      url: bp.buildPath("api/register"),
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      data: js,
+    };
+
+    axios(config)
+      .then(function (response) {
+        var res = response.data;
+
+        if (res.error) {
+          setMessage("Account already exists under given email");
+        } else {
+          // storage.storeToken(res);
+          // var jwt = require("jsonwebtoken");
+
+          // var ud = jwt.decode(storage.retrieveToken(), {
+          //   complete: true
+          // });
+
+          // var userId = ud.payload.userId;
+          // var firstName = ud.payload.firstName;
+          // var lastName = ud.payload.lastName;
+
+          // var user = {
+          //   firstName: firstName,
+          //   lastName: lastName,
+          //   id: userId
+          // };
+
+          // localStorage.setItem("user_data", JSON.stringify(user));
+
+          window.location.href = "/verify-account";
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirst] = useState("");
@@ -76,13 +145,7 @@ function RegisterScreen(props) {
         <Button
           title="Register Now"
           color="#fff"
-          onPress={() => [
-            console.log(firstName),
-            console.log(lastName),
-            console.log(username),
-            console.log(email),
-            console.log(password),
-          ]}
+          onPress={() => navigation.navigate("Login")}
         />
       </View>
 
