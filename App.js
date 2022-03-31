@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import WelcomeScreen from "./screens/WelcomeScreen.js";
@@ -14,7 +14,7 @@ const RootStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Register">
+      <RootStack.Navigator initialRouteName="Welcome">
         <RootStack.Screen
           name="Welcome"
           component={WelcomeScreen}
@@ -27,6 +27,8 @@ export default function App() {
           component={RegisterScreen}
           options={{
             title: "Register",
+            headerTintColor: "#fff",
+            headerBackTitleVisible: false,
             headerStyle: { backgroundColor: "#4FB5D3" },
             headerTitleStyle: {
               color: "#fff",
@@ -40,6 +42,8 @@ export default function App() {
           component={LoginScreen}
           options={{
             title: "Login",
+            headerTintColor: "#fff",
+            headerBackTitleVisible: false,
             headerStyle: { backgroundColor: "#ACD1AF" },
             headerTitleStyle: {
               color: "#fff",
@@ -48,7 +52,20 @@ export default function App() {
             },
           }}
         />
-        <RootStack.Screen name="Home" component={HomeScreen} />
+        <RootStack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: "Shreddit",
+            headerStyle: { backgroundColor: "#4FB5D3" },
+            headerBackVisible: false,
+            headerTitleStyle: {
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: 30,
+            },
+          }}
+        />
         <RootStack.Screen
           name="Profile"
           component={ProfileScreen}
