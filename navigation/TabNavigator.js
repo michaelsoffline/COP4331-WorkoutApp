@@ -49,7 +49,7 @@ const TabBar = () => {
       <Tab.Screen
         name="Workouts"
         component={WorkoutsStackNavigator}
-        options={{ tabBarLabel: "Workouts" }}
+        options={{ tabBarLabel: "Workouts", tabBarActiveTintColor: "#ACD1AF" }}
       />
       <Tab.Screen
         name="HomeTab"
@@ -59,7 +59,7 @@ const TabBar = () => {
       <Tab.Screen
         name="Settings"
         component={SettingsStackNavigator}
-        options={{ tabBarLabel: "Settings" }}
+        options={{ tabBarLabel: "Settings", tabBarActiveTintColor: "#808080" }}
       />
     </Tab.Navigator>
   );
