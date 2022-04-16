@@ -1,6 +1,10 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet, Button } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
+import CustomButton from "./CustomButton";
 
 const SettingsComponent = ({ settingsOptions, navigation }) => {
   return (
@@ -15,13 +19,7 @@ const SettingsComponent = ({ settingsOptions, navigation }) => {
           <View style={{ height: 0.5, backgroundColor: "grey" }} />
         </TouchableOpacity>
       ))}
-      <View style={styles.buttonStyle}>
-        <Button
-          title="Logout"
-          color="white"
-          onPress={() => console.log("Logout")}
-        ></Button>
-      </View>
+      <CustomButton danger title="Logout" loading={false} disabled={false} />
     </ScrollView>
   );
 };
@@ -41,21 +39,6 @@ const styles = StyleSheet.create({
     fontSize: 19,
     opacity: 0.6,
     paddingTop: 15,
-  },
-
-  buttonStyle: {
-    marginTop: 525,
-    marginLeft: 20,
-    marginRight: 20,
-    backgroundColor: "grey",
-    position: "absolute",
-    paddingHorizontal: 15,
-    paddingBottom: 15,
-    paddingTop: 15,
-    alignItems: "center",
-    width: "90%",
-    height: "15%",
-    borderRadius: 25,
   },
 });
 

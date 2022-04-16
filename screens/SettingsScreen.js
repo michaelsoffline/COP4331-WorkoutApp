@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import SettingsComponent from "../components/SettingsComponent";
+import { LogBox } from "react-native";
+LogBox.ignoreLogs([
+  "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
+]);
 
 const SettingsScreen = () => {
   const settingsOptions = [
@@ -28,9 +32,5 @@ const SettingsScreen = () => {
 
   return <SettingsComponent settingsOptions={settingsOptions} />;
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default SettingsScreen;
