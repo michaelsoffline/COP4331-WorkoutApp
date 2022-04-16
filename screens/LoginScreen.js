@@ -22,6 +22,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import axios from "axios";
 
+var loginInfo = {};
+
 function LoginScreen({ navigation }) {
   var bp = require("../components/Path");
   // var storage = require("../tokenStorage.js");
@@ -33,12 +35,12 @@ function LoginScreen({ navigation }) {
   const attemptLogin = async (event) => {
     event.preventDefault();
 
-    var obj = {
+    var loginInfo = {
       email: loginEmail.value,
       password: loginPassword.value,
     };
 
-    var js = JSON.stringify(obj);
+    var js = JSON.stringify(loginInfo);
 
     var config = {
       method: "POST",
@@ -123,7 +125,32 @@ function LoginScreen({ navigation }) {
         <Button
           title="Login"
           color="#fff"
-          onPress={() => navigation.navigate("Home")}
+          onPress = {async () => {
+            try {
+              const loginCredentials = {email: username, password: password};
+              var stringifyCreds = JSON.stringify(loginCredentials);
+
+              const response = await fetch('https://shreddit-ucf.herokuapp.com/api/login', {method: 'POST', body: stringifyCreds, headers: {'Content-Type': 'application/json'}});
+
+              console.log(response);
+
+              var responseRes = JSON.parse(await response.text());
+
+              console.log(responseRes);
+
+              if(responseRes.error == "No account belongs to that email.") {
+                console.log("Invalid Login Credentials");
+              }
+              else if(responseRes.error == "Account is not verified, please check email for verification email") {
+                console.log("Please verify your email");
+              }
+              else {
+                navigation.navigate("Home");
+              }
+            } catch(error) {
+              console.log("ERROR HERE");
+            }
+          }} 
         />
       </View>
       <View style={styles.backSquare}>
