@@ -7,6 +7,12 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "../screens/HomeScreen";
 import WorkoutsScreen from "../screens/WorkoutsScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import WelcomeScreen from "../screens/WelcomeScreen";
+
+import ProfileInfoScreen from "../screens/ProfileInfoScreen";
+import PasswordResetScreen from "../screens/PasswordResetScreen";
+import NotificationsScreen from "../screens/NotificationsScreen";
+import DarkModeScreen from "../screens/DarkModeScreen";
 
 // function getHeaderTitle(route) {
 //   const routeName = getFocusedRouteNameFromRoute(route) ?? "HomeTab";
@@ -124,6 +130,46 @@ const SettingsStackNavigator = () => {
       }}
     >
       <SettingsStack.Screen name="SettingsPage" component={SettingsScreen} />
+      <SettingsStack.Screen
+        name="ProfileInfo"
+        component={ProfileInfoScreen}
+        options={{
+          title: "Profile Info",
+          headerBackVisible: true,
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            color: "#fff",
+            fontSize: 20,
+          },
+        }}
+      />
+      <SettingsStack.Screen
+        name="PasswordReset"
+        component={PasswordResetScreen}
+        options={{
+          title: "Password Reset",
+          headerBackVisible: true,
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            color: "#fff",
+            fontSize: 20,
+          },
+        }}
+      />
+      <SettingsStack.Screen
+        name="NotificationsPage"
+        component={NotificationsScreen}
+        options={{
+          title: "Notifications",
+          headerBackVisible: true,
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            color: "#fff",
+            fontSize: 20,
+          },
+        }}
+      />
+      <SettingsStack.Screen name="DarkMode" component={DarkModeScreen} />
     </SettingsStack.Navigator>
   );
 };

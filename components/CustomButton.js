@@ -8,6 +8,7 @@ const CustomButton = ({
   secondary,
   primary,
   danger,
+  logout,
   disabled,
   loading,
   onPress,
@@ -26,17 +27,16 @@ const CustomButton = ({
     if (secondary) {
       return colors.secondary;
     }
+    if (logout) {
+      return colors.grey;
+    }
   };
 
   return (
     <TouchableOpacity
       disabled={disabled}
       onPress={onPress}
-      style={[
-        styles.container,
-        { backgroundColor: getBackgroundColor() },
-        style,
-      ]}
+      style={[{ backgroundColor: getBackgroundColor() }, style]}
     >
       <View style={[styles.loaderSection]}>
         {loading && (
@@ -61,7 +61,20 @@ const CustomButton = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: {},
+
+  loginBtn: {
+    height: 70,
+    paddingHorizontal: 5,
+    marginVertical: 60,
+    marginHorizontal: 55,
+    borderRadius: 15,
+    width: "70%",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+
+  logoutBtn: {
     height: 70,
     paddingHorizontal: 5,
     marginVertical: 60,

@@ -21,6 +21,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import axios from "axios";
+import CustomButton from "../components/CustomButton";
 
 function RegisterScreen({ navigation }) {
   var bp = require("../components/Path");
@@ -141,16 +142,15 @@ function RegisterScreen({ navigation }) {
         defaultValue={password}
       />
 
-      <View style={styles.registerSquare}>
-        <Button
+      <View style={{ marginHorizontal: 30 }}>
+        <CustomButton
+          primary
           title="Register Now"
-          color="#fff"
+          loading={false}
+          disabled={false}
           onPress={() => navigation.navigate("Login")}
+          style={styles.registerButton}
         />
-      </View>
-
-      <View style={styles.backSquare}>
-        <Button title="Back" color="#fff" onPress={() => console.log("Back")} />
       </View>
     </View>
   );
@@ -196,13 +196,16 @@ const styles = StyleSheet.create({
   smallPadding: {
     padding: "2%",
   },
-  registerSquare: {
-    position: "absolute",
-    bottom: "15%",
-    width: "80%",
-    height: "7%",
-    backgroundColor: "#4FB5D3",
-    justifyContent: "center",
+  registerButton: {
+    height: 60,
+    paddingHorizontal: 5,
+    marginVertical: 60,
+    right: 25,
+    marginHorizontal: 35,
+    borderRadius: 15,
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 });
 

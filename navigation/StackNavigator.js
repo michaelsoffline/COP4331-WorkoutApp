@@ -69,4 +69,23 @@ const WelcomeStackNavigator = () => {
   );
 };
 
+// const SettingsStack = createNativeStackNavigator();
+
+// const SettingsStackNavigator = () => {
+//   return (
+//     <SettingsStack.Navigator>
+//       <SettingsStack.Screen name="ProfileInfo" component={ProfileInfoScreen} />
+//       <SettingsStack.Screen
+//         name="PasswordReset"
+//         component={PasswordResetScreen}
+//       />
+//       <SettingsStack.Screen
+//         name="Notifications"
+//         component={NotificationsScreen}
+//       />
+//       <SettingsStack.Screen name="DarkMode" component={DarkModeScreen} />
+//     </SettingsStack.Navigator>
+//   );
+// };
+
 export { StackNavigator };
