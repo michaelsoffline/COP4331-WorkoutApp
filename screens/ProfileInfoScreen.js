@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Feather as Icon } from "react-native-vector-icons";
 import { BorderlessButton } from "react-native-gesture-handler";
+import CustomInput from "../components/CustomInput";
 
 const ProfileInfoScreen = () => {
+  const [username, setUsername] = useState("@Username");
+  const theUserName = "@Username";
+
   return (
     <View style={[styles.mainHeader, { flexDirection: "column" }]}>
       <View style={{ flex: 1, backgroundColor: "#4fb5d3" }} />
-      <View style={{ flex: 2, backgroundColor: "white" }} />
       <View style={[styles.profileImageBorder]} />
       <View style={[styles.profileImage]} />
+      <Text style={styles.usernameLabel}>{theUserName}</Text>
+      <View style={{ marginVertical: 200 }}>
+        <CustomInput placeholder="Enter your first name" label="First Name" />
+        <CustomInput placeholder="Enter your last name" label="Last Name" />
+        <CustomInput placeholder="Enter your username" label="Username" />
+      </View>
     </View>
   );
 };
@@ -29,7 +38,21 @@ const data = [
 
 const styles = StyleSheet.create({
   mainHeader: {
-    flex: 1,
+    position: "absolute",
+    width: "100%",
+    height: "30%",
+    backgroundColor: "#4fb5d3",
+  },
+
+  usernameLabel: {
+    color: "white",
+    fontSize: 26,
+    fontWeight: "bold",
+    position: "absolute",
+    marginHorizontal: 110,
+    marginVertical: 150,
+    width: "50%",
+    justifyContent: "space-evenly",
   },
 
   profileImage: {
@@ -39,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgrey",
     position: "absolute",
     marginHorizontal: 150,
-    marginVertical: 100,
+    marginVertical: 50,
   },
 
   profileImageBorder: {
@@ -49,7 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#808080",
     position: "absolute",
     marginHorizontal: 147,
-    marginVertical: 97,
+    marginVertical: 47,
   },
 
   genderBtn: {

@@ -3,8 +3,7 @@
     "name": "ShredditApp",
     "slug": "ShredditApp",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "privacy": "public",
+    "assetBundlePatterns": ["**/*"]
   }
 }

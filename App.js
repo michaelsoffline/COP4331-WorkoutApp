@@ -4,6 +4,7 @@ import TabBar from "./navigation/TabNavigator";
 import { StackNavigator } from "./navigation/StackNavigator";
 import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Warning: ..."]);
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (

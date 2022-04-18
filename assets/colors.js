@@ -3,7 +3,7 @@ export default {
   secondary: "#acd1af",
   tertiary: "#808080",
   accent: "#adb5bd",
-  danger: "#4e5861",
+  danger: "#dc3545",
   success: "#4cc9f0",
   grey: "#adb5bd",
   white: "#fff",
