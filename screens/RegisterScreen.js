@@ -22,6 +22,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import axios from "axios";
 
+// HERE FROM HERE
+
 function RegisterScreen({ navigation }) {
   var bp = require("../components/Path");
   // var storage = require("../tokenStorage.js");
