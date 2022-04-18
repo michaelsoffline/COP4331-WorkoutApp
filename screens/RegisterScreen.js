@@ -148,7 +148,29 @@ function RegisterScreen({ navigation }) {
           title="Register Now"
           loading={false}
           disabled={false}
-          onPress={() => navigation.navigate("Login")}
+
+          //navigation.navigate("Login")
+          onPress={async () => {
+            try {
+              const registerCredentials = {username: username, firstName: firstName, lastName: lastName, email: email, password: password, password2: password};
+              var JSONifyCredentials = JSON.stringify(registerCredentials);
+
+              console.log(JSONifyCredentials);
+              const response = await fetch("https://shreddit-ucf.herokuapp.com/api/register", 
+              {
+                method: "POST",
+                body: JSONifyCredentials,
+                headers: { "Content-Type": "application/json" },
+              });
+
+              if (response.status == 200) {
+                navigation.navigate("Login");
+              }
+              
+            } catch(error) {
+              console.log(error);
+            }
+          }}
           style={styles.registerButton}
         />
       </View>

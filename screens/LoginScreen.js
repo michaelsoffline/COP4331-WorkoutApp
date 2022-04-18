@@ -86,6 +86,10 @@ function LoginScreen({ navigation }) {
       });
   };
 
+  function isEmpty(str) {
+    return !str.trim().length;
+  }
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -102,7 +106,7 @@ function LoginScreen({ navigation }) {
 
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="Email"
         secureTextEntry={false}
         onChangeText={(newUsername) => setUsername(newUsername)}
         defaultValue={username}
@@ -123,6 +127,7 @@ function LoginScreen({ navigation }) {
           disabled={false}
           onPress={async () => {
             try {
+
               const loginCredentials = { email: username, password: password };
               var stringifyCreds = JSON.stringify(loginCredentials);
 
@@ -135,22 +140,12 @@ function LoginScreen({ navigation }) {
                 }
               );
 
-              console.log(response);
-
-              var responseRes = JSON.parse(await response.text());
-
-              console.log(responseRes);
-
-              if (responseRes.error == "No account belongs to that email.") {
-                console.log("Invalid Login Credentials");
-              } else if (
-                responseRes.error ==
-                "Account is not verified, please check email for verification email"
-              ) {
-                console.log("Please verify your email");
-              } else {
+              if(response.status == 200) {
                 navigation.navigate("Home");
+              } else {
+                navigation.navigate("Login");
               }
+
             } catch (error) {
               console.log("ERROR HERE");
             }
