@@ -3,10 +3,13 @@ import { Text, View, StyleSheet } from "react-native";
 import { Feather as Icon } from "react-native-vector-icons";
 import { BorderlessButton } from "react-native-gesture-handler";
 import CustomInput from "../components/CustomInput";
+import { ButtonGroup } from "@rneui/base";
+import { Button } from "react-native-web";
 
 const ProfileInfoScreen = () => {
   const [username, setUsername] = useState("@Username");
   const theUserName = "@Username";
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <View style={[styles.mainHeader, { flexDirection: "column" }]}>
@@ -18,6 +21,17 @@ const ProfileInfoScreen = () => {
         <CustomInput placeholder="Enter your first name" label="First Name" />
         <CustomInput placeholder="Enter your last name" label="Last Name" />
         <CustomInput placeholder="Enter your username" label="Username" />
+      </View>
+      <View style={{ backgroundColor: "#fff", marginVertical: 5 }}>
+        <ButtonGroup
+          buttons={["Male", "Female"]}
+          selectedIndex={selectedIndex}
+          onPress={(value) => {
+            setSelectedIndex(value);
+          }}
+          containerStyle={{ marginBottom: 20, marginTop: 20 }}
+          selectedButtonStyle={{ backgroundColor: "#4fb5d3" }}
+        />
       </View>
     </View>
   );
@@ -73,12 +87,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginHorizontal: 147,
     marginVertical: 47,
-  },
-
-  genderBtn: {
-    marginLeft: 10,
-    marginTop: 10,
-    alignContent: "center",
-    backgroundColor: "white",
   },
 });

@@ -147,7 +147,7 @@ const SettingsStackNavigator = () => {
         name="PasswordReset"
         component={PasswordResetScreen}
         options={{
-          title: "Password Reset",
+          title: "Change Password",
           headerBackVisible: true,
           headerTintColor: "#fff",
           headerTitleStyle: {
