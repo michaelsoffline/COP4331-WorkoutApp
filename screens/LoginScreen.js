@@ -11,14 +11,13 @@ import {
   TextInput,
 } from "react-native";
 
+import CustomButton from "../components/CustomButton";
+
 import {
   Alert,
   SafeAreaView,
   TouchableWithoutFeedback,
 } from "react-native-web";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import axios from "axios";
 
@@ -87,16 +86,15 @@ function LoginScreen({ navigation }) {
       });
   };
 
+  function isEmpty(str) {
+    return !str.trim().length;
+  }
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
     // Main View
     <View style={styles.background}>
-      {/* <View style = {styles.colorTop}>
-                <View style={styles.smallPadding}></View>
-                <Text style={styles.titleText}>Login</Text>
-            </View> */}
-
       <View style={styles.smallPadding}></View>
 
       <Image
@@ -108,7 +106,7 @@ function LoginScreen({ navigation }) {
 
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="Email"
         secureTextEntry={false}
         onChangeText={(newUsername) => setUsername(newUsername)}
         defaultValue={username}
@@ -121,40 +119,39 @@ function LoginScreen({ navigation }) {
         defaultValue={password}
       />
 
-      <View style={styles.loginSquare}>
-        <Button
+      <View style={{ marginHorizontal: 30 }}>
+        <CustomButton
+          secondary
           title="Login"
-          color="#fff"
-          onPress = {async () => {
+          loading={false}
+          disabled={false}
+          onPress={async () => {
             try {
-              const loginCredentials = {email: username, password: password};
+
+              const loginCredentials = { email: username, password: password };
               var stringifyCreds = JSON.stringify(loginCredentials);
 
-              const response = await fetch('https://shreddit-ucf.herokuapp.com/api/login', {method: 'POST', body: stringifyCreds, headers: {'Content-Type': 'application/json'}});
+              const response = await fetch(
+                "https://shreddit-ucf.herokuapp.com/api/login",
+                {
+                  method: "POST",
+                  body: stringifyCreds,
+                  headers: { "Content-Type": "application/json" },
+                }
+              );
 
-              console.log(response);
-
-              var responseRes = JSON.parse(await response.text());
-
-              console.log(responseRes);
-
-              if(responseRes.error == "No account belongs to that email.") {
-                console.log("Invalid Login Credentials");
-              }
-              else if(responseRes.error == "Account is not verified, please check email for verification email") {
-                console.log("Please verify your email");
-              }
-              else {
+              if(response.status == 200) {
                 navigation.navigate("Home");
+              } else {
+                navigation.navigate("Login");
               }
-            } catch(error) {
+
+            } catch (error) {
               console.log("ERROR HERE");
             }
-          }} 
+          }}
+          style={styles.loginButton}
         />
-      </View>
-      <View style={styles.backSquare}>
-        <Button title="Back" color="#fff" onPress={() => console.log("Back")} />
       </View>
     </View>
   );
@@ -168,26 +165,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     resizeMode: "contain",
   },
-  backSquare: {
-    position: "absolute",
-    bottom: "7%",
-    width: "80%",
-    height: "7%",
-    backgroundColor: "red",
-    justifyContent: "center",
-  },
-  colorTop: {
-    backgroundColor: "#ACD1AF",
-    width: "100%",
-    height: "15%",
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   input: {
     height: "5%",
     width: "80%",
-    margin: 12,
+    margin: 10,
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
@@ -198,15 +179,24 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   smallPadding: {
-    padding: "2%",
+    marginVertical: "10%",
   },
-  loginSquare: {
-    position: "absolute",
-    bottom: "15%",
-    width: "80%",
-    height: "7%",
-    backgroundColor: "#ACD1AF",
-    justifyContent: "center",
+  loginButton: {
+    height: 60,
+    paddingHorizontal: 5,
+    marginVertical: 20,
+    left: 2,
+    marginHorizontal: 35,
+    borderRadius: 15,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    // position: "absolute",
+    // width: "80%",
+    // height: "7%",
+    // borderRadius: 10,
+    // backgroundColor: "#ACD1AF",
+    // justifyContent: "center",
   },
 });
 export default LoginScreen;

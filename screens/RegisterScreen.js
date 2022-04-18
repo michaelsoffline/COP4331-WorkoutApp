@@ -21,8 +21,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import axios from "axios";
-
-// HERE FROM HERE
+import CustomButton from "../components/CustomButton";
 
 function RegisterScreen({ navigation }) {
   var bp = require("../components/Path");
@@ -143,16 +142,37 @@ function RegisterScreen({ navigation }) {
         defaultValue={password}
       />
 
-      <View style={styles.registerSquare}>
-        <Button
+      <View style={{ marginHorizontal: 30 }}>
+        <CustomButton
+          primary
           title="Register Now"
-          color="#fff"
-          onPress={() => navigation.navigate("Login")}
-        />
-      </View>
+          loading={false}
+          disabled={false}
 
-      <View style={styles.backSquare}>
-        <Button title="Back" color="#fff" onPress={() => console.log("Back")} />
+          //navigation.navigate("Login")
+          onPress={async () => {
+            try {
+              const registerCredentials = {username: username, firstName: firstName, lastName: lastName, email: email, password: password, password2: password};
+              var JSONifyCredentials = JSON.stringify(registerCredentials);
+
+              console.log(JSONifyCredentials);
+              const response = await fetch("https://shreddit-ucf.herokuapp.com/api/register", 
+              {
+                method: "POST",
+                body: JSONifyCredentials,
+                headers: { "Content-Type": "application/json" },
+              });
+
+              if (response.status == 200) {
+                navigation.navigate("Login");
+              }
+              
+            } catch(error) {
+              console.log(error);
+            }
+          }}
+          style={styles.registerButton}
+        />
       </View>
     </View>
   );
@@ -198,13 +218,16 @@ const styles = StyleSheet.create({
   smallPadding: {
     padding: "2%",
   },
-  registerSquare: {
-    position: "absolute",
-    bottom: "15%",
-    width: "80%",
-    height: "7%",
-    backgroundColor: "#4FB5D3",
-    justifyContent: "center",
+  registerButton: {
+    height: 60,
+    paddingHorizontal: 5,
+    marginVertical: 60,
+    right: 25,
+    marginHorizontal: 35,
+    borderRadius: 15,
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 });
 
