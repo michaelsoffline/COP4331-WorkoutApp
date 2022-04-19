@@ -1,4 +1,4 @@
-// Place this in main directory
+import axios from "axios";
 
 
 // Sample Data of workouts
@@ -33,3 +33,21 @@ export const recentlyCompleted = [
     {name: 'Custom Workout 13', key: '9', dateCompleted: '04/23/2022 19:18'},
 
 ];
+
+
+
+/*
+function getWorkouts() {
+    const [data, setData] = useState(null);
+  
+    const fetchData = async () => {
+      const response = await fetch("https://shreddit-ucf.herokuapp.com/api/displaySessions", 
+                      {method: 'POST', body: js, headers:{'Content-Type':'application/json'}});
+      const data = await response.json();
+      setData(data);
+    };
+  
+    useEffect(() => {
+      fetchData();
+    }, []);
+  }*/
