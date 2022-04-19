@@ -12,65 +12,39 @@ import {
 } from "react-native";
 import axios from "axios";
 import tokenStorage from "../tokenStorage.js"
+import {recentlyCompleted} from '../workouts.js';
 LogBox.ignoreAllLogs();
 
 function HomeScreen(props) {
 
-  var ud = AsyncStorage.getItem('user_data');
-  //var ud = JSON.parse(_ud);
 
-  const [sessions, setSessions] = useState([]);
 
-  var bp = require("../components/Path");
+  const [completed, setCompleted] = useState(recentlyCompleted);
 
-  var obj = {
-    "userID": ud.userId,
-    "jwtToken": tokenStorage.retrieveToken()
-  };
+    return(
+        <ScrollView contentContainderStyle={styles.container}>
 
-  var js = JSON.stringify(obj);
-
-  var config = bp.apiCall("api/displaySessions", js);
-
-  useEffect(() => {
-      
-    axios(config).then(function (response) {
-
-      var res = response.data;
-      setSessions(res.sessions);
-
-    }).catch(function (error) {
-      console.log(error);
-    });
-
-  }, []);
-
-  return (
-    <ScrollView contentContainderStyle={styles.container}>
-      <Text style={styles.titleText}>Recently Completed Workouts:</Text>
-      <View style={styles.smallPadding}></View>
-
-      {sessions.map((item) => {
-        return (
-          <View key={item.key} style={styles.mainRect}>
-            <TouchableOpacity
-              style={styles.exerciseRectangle}
-              title={item.name}
-              activeOpacity={0.5}
-            >
-              <View style={styles.contentView}>
-                <Text style={styles.item}>{item.sessionName}</Text>
-                <Text style={styles.date}>
-                  Date Completed: {item.updatedAt}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <Text style={styles.titleText}>Recently Completed Workouts:</Text>
             <View style={styles.smallPadding}></View>
-          </View>
-        );
-      })}
-    </ScrollView>
-  );
+
+            {completed.map((item) => {
+                return(
+                    <View key={item.key} style={styles.mainRect}>
+
+                        <TouchableOpacity style={styles.exerciseRectangle} title={item.name} activeOpacity={0.5} onPress={() => console.log("Go to " + item.name + " screen.")}>
+                            <View style={styles.contentView}>
+                                <Text style={styles.item}>{item.name}</Text>
+                                <Text style={styles.date}>Date Completed: {item.dateCompleted}</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.smallPadding}></View>
+
+                    </View>
+                );
+            })}
+
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 const TOKEN_KEY = 'token_data';
-import AsyncStorage from "react-native";
+import {AsyncStorage} from "react-native";
 
 exports.storeToken = function (tok) {
   
