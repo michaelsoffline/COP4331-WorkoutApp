@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,31 +8,60 @@ import {
   TouchableOpacity,
   Image,
   LogBox,
+  AsyncStorage,
 } from "react-native";
-import { recentlyCompleted } from "../workouts.js";
+import axios from "axios";
+import tokenStorage from "../tokenStorage.js"
 LogBox.ignoreAllLogs();
 
 function HomeScreen(props) {
-  const [completed, setCompleted] = useState(recentlyCompleted);
+
+  var ud = AsyncStorage.getItem('user_data');
+  //var ud = JSON.parse(_ud);
+
+  const [sessions, setSessions] = useState([]);
+
+  var bp = require("../components/Path");
+
+  var obj = {
+    "userID": ud.userId,
+    "jwtToken": tokenStorage.retrieveToken()
+  };
+
+  var js = JSON.stringify(obj);
+
+  var config = bp.apiCall("api/displaySessions", js);
+
+  useEffect(() => {
+      
+    axios(config).then(function (response) {
+
+      var res = response.data;
+      setSessions(res.sessions);
+
+    }).catch(function (error) {
+      console.log(error);
+    });
+
+  }, []);
 
   return (
     <ScrollView contentContainderStyle={styles.container}>
       <Text style={styles.titleText}>Recently Completed Workouts:</Text>
       <View style={styles.smallPadding}></View>
 
-      {completed.map((item) => {
+      {sessions.map((item) => {
         return (
           <View key={item.key} style={styles.mainRect}>
             <TouchableOpacity
               style={styles.exerciseRectangle}
               title={item.name}
               activeOpacity={0.5}
-              onPress={() => console.log("Go to " + item.name + " screen.")}
             >
               <View style={styles.contentView}>
-                <Text style={styles.item}>{item.name}</Text>
+                <Text style={styles.item}>{item.sessionName}</Text>
                 <Text style={styles.date}>
-                  Date Completed: {item.dateCompleted}
+                  Date Completed: {item.updatedAt}
                 </Text>
               </View>
             </TouchableOpacity>
