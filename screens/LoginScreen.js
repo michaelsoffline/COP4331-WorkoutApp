@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import react from "react-native";
+import react, { Pressable } from "react-native";
 import {
   StyleSheet,
   Text,
@@ -127,7 +127,6 @@ function LoginScreen({ navigation }) {
           disabled={false}
           onPress={async () => {
             try {
-
               const loginCredentials = { email: username, password: password };
               var stringifyCreds = JSON.stringify(loginCredentials);
 
@@ -140,18 +139,20 @@ function LoginScreen({ navigation }) {
                 }
               );
 
-              if(response.status == 200) {
+              if (response.status == 200) {
                 navigation.navigate("Home");
               } else {
                 navigation.navigate("Login");
               }
-
             } catch (error) {
               console.log("ERROR HERE");
             }
           }}
           style={styles.loginButton}
         />
+      </View>
+      <View>
+        <Button color="#9300ff" title="Forgot Password?" onPress={() => {}} />
       </View>
     </View>
   );
@@ -191,12 +192,10 @@ const styles = StyleSheet.create({
     width: 200,
     alignItems: "center",
     justifyContent: "space-evenly",
-    // position: "absolute",
-    // width: "80%",
-    // height: "7%",
-    // borderRadius: 10,
-    // backgroundColor: "#ACD1AF",
-    // justifyContent: "center",
+  },
+  forgotPasswordBtn: {
+    color: "#9300ff",
+    fontSize: 10,
   },
 });
 export default LoginScreen;
