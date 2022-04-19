@@ -39,17 +39,6 @@ const ProfileInfoScreen = () => {
 
 export default ProfileInfoScreen;
 
-const data = [
-  {
-    value: "0",
-    label: "Male",
-  },
-  {
-    value: "1",
-    label: "Female",
-  },
-];
-
 const styles = StyleSheet.create({
   mainHeader: {
     position: "absolute",

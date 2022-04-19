@@ -5,6 +5,7 @@ import TabBar from "./TabNavigator";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,16 @@ const WelcomeStackNavigator = () => {
             fontWeight: "bold",
             fontSize: 30,
           },
+        }}
+      />
+      <WelcomeStack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{
+          title: "Forgot Password",
+          fontSize: 30,
+          headerTintColor: "#fff",
+          headerStyle: { backgroundColor: "#6980DD" },
         }}
       />
     </WelcomeStack.Navigator>

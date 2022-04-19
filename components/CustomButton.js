@@ -9,6 +9,7 @@ const CustomButton = ({
   primary,
   danger,
   logout,
+  pwdrecovery,
   disabled,
   loading,
   onPress,
@@ -29,6 +30,9 @@ const CustomButton = ({
     }
     if (logout) {
       return colors.grey;
+    }
+    if (pwdrecovery) {
+      return colors.periwinkle;
     }
   };
 

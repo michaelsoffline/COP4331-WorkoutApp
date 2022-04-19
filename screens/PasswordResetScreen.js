@@ -25,7 +25,6 @@ export default PasswordResetScreen;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     padding: 20,
     backgroundColor: "#fff",
     paddingVertical: 50,

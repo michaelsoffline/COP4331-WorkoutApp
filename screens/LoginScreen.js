@@ -152,7 +152,11 @@ function LoginScreen({ navigation }) {
         />
       </View>
       <View>
-        <Button color="#9300ff" title="Forgot Password?" onPress={() => {}} />
+        <Button
+          color="#6980dd"
+          title="Forgot Password?"
+          onPress={() => navigation.navigate("ForgotPassword")}
+        />
       </View>
     </View>
   );
